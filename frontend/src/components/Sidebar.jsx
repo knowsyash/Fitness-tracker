@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Button, Divider, Avatar, CircularProgress } from "@mui/material";
+import { Box, Typography, Divider, Avatar, CircularProgress } from "@mui/material";
 import { useHealthData } from '../context/HealthDataContext';
 
 const Sidebar = () => {
