@@ -7,6 +7,7 @@ import Sidebar from './components/Sidebar';
 import { Box } from '@mui/material';
 import DietPlan from './pages/DietPlan';
 import { HealthDataProvider } from './context/HealthDataContext';
+import FitnessPlanner from './pages/FitnessPlanner';
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
                   {/* <Route path="/start" element={<UserOnboarding />} /> */}
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/dietPlan" element={<DietPlan />} />
+                  <Route path="/fitnessPlan" element={<FitnessPlanner></FitnessPlanner>} />
                 </Routes>
               </Box>
             </Box>

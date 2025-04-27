@@ -34,8 +34,14 @@ const UserOnboarding = () => {
       const isConfirmed = window.confirm("Are you sure you want to submit the form?");
 
       if (isConfirmed) {
+        // Save data to backend (optional)
+        // saveDataToBackend(formData);
+        
+        // Explicitly save to localStorage (context will handle this now)
+        localStorage.setItem('healthFormData', JSON.stringify(formData));
+        
         // Proceed to navigate if the user confirms
-        navigate('/dashboard');
+        navigate('/dietPlan'); // Redirect to the diet plan page
       } else {
         // Optionally, you can handle the cancellation here
         console.log("Submission canceled");

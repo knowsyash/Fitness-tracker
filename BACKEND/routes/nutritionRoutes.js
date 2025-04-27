@@ -1,4 +1,5 @@
 import express from 'express';
+import { getDietPlan } from '../controllers/dietplan.js';
 
 const router = express.Router();
 
@@ -19,6 +20,23 @@ const router = express.Router();
       res.status(500).json({ message: 'Internal server error' });
     }
   });
+
+ router.get('/dietPlan', async (req, res) => {
+    try {
+        const dietPlan = await getDietPlan(); // Assuming this function fetches the diet plan
+        console.log('Diet Plan:', dietPlan); // Log the diet plan for debugging
+        res.status(200).json(dietPlan);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error fetching diet plan' });
+    }
+
+    
+
+
+
+ })
+
 
   
 
