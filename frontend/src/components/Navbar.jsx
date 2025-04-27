@@ -18,7 +18,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import handleGoogleLogin from './Login';
 
 const drawerWidth = 240;
-const navItems = ['Start', 'About', 'Contact'];
+const navItems = ['Dashboard', 'DietPlan', 'Profile'];
 
 function Navbar(props) {
   const { window } = props;
@@ -31,9 +31,9 @@ function Navbar(props) {
   };
 
   const handleNavClick = (item) => {
-    if (item === 'Start') navigate('/');
-    if (item === 'About') navigate('/about');
-    if (item === 'Contact') navigate('/contact');
+    if (item === 'Dashboard') navigate('/dashboard');
+    if (item === 'DietPlan') navigate('/dietplan');
+    if (item === 'Profile') navigate('/dietPlan');
   };
 
   const drawer = (

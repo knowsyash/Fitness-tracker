@@ -9,7 +9,6 @@ import {
   FormGroup,
   TextField
 } from '@mui/material';
-import { FaApple } from 'react-icons/fa';
 
 const Dashboard = () => {
   const [waterIntake, setWaterIntake] = useState('');
@@ -23,7 +22,6 @@ const Dashboard = () => {
   const [waterTarget, setWaterTarget] = useState('4');
   const [sleepTarget, setSleepTarget] = useState('8');
   const [currentDateTime, setCurrentDateTime] = useState('');
-  const [notes, setNotes] = useState('');
 
   useEffect(() => {
     const updateDateTime = () => {
@@ -54,18 +52,12 @@ const Dashboard = () => {
   };
 
   return (
-    <Box
-      sx={{
-        width: '100%',
-        minHeight: '100vh',
-        backgroundColor: '#212121',
-        pt: '80px',       // space for navbar
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        overflowX: 'hidden',
-      }}
-    >
+    <Box sx={{ 
+      width: '100%',
+      backgroundColor: '#212121', // Dark background for the entire component
+      minHeight: '100vh', // Ensure it fills the viewport
+      pb: 4 // Padding at bottom to prevent cutoff
+    }}>
       {/* Date & Time */}
       <Box
         sx={{
@@ -78,16 +70,20 @@ const Dashboard = () => {
           textAlign: 'center',
           borderRadius: 1,
           boxShadow: 2,
+          mx: 'auto'
         }}
       >
         <Typography variant="h6">Current Date & Time</Typography>
         <Typography variant="body1">{currentDateTime}</Typography>
       </Box>
 
-      <Container maxWidth="xxl" sx={{ px: 0 }}>
-        <Grid container spacing={3} justifyContent="center" alignItems="flex-start">
+      <Container maxWidth={false} sx={{ 
+        px: { xs: 2, sm: 3 },
+        backgroundColor: '#212121' // Ensure container has dark bg
+      }}>
+        <Grid container spacing={3} justifyContent="center">
           {/* Left Column (Water & Sleep) */}
-          <Grid item xs={12} sm={6} md={2}>
+          <Grid item xs={12} sm={6} md={3}>
             <Box
               sx={{
                 bgcolor: '#3a3a3a',
@@ -108,7 +104,14 @@ const Dashboard = () => {
                 value={waterTarget}
                 onChange={(e) => setWaterTarget(e.target.value)}
                 InputLabelProps={{ sx: { color: '#90caf9' } }}
-                InputProps={{ sx: { color: '#fff' } }}
+                InputProps={{ 
+                  sx: { 
+                    color: '#fff',
+                    '& fieldset': {
+                      borderColor: '#64b5f6'
+                    }
+                  } 
+                }}
                 sx={{ mb: 1 }}
               />
               <TextField
@@ -118,7 +121,14 @@ const Dashboard = () => {
                 value={waterIntake}
                 onChange={(e) => setWaterIntake(e.target.value)}
                 InputLabelProps={{ sx: { color: '#90caf9' } }}
-                InputProps={{ sx: { color: '#fff' } }}
+                InputProps={{ 
+                  sx: { 
+                    color: '#fff',
+                    '& fieldset': {
+                      borderColor: '#64b5f6'
+                    }
+                  } 
+                }}
                 sx={{ mb: 1 }}
               />
               <Typography variant="caption" color="secondary">
@@ -145,7 +155,14 @@ const Dashboard = () => {
                 value={sleepTarget}
                 onChange={(e) => setSleepTarget(e.target.value)}
                 InputLabelProps={{ sx: { color: '#90caf9' } }}
-                InputProps={{ sx: { color: '#fff' } }}
+                InputProps={{ 
+                  sx: { 
+                    color: '#fff',
+                    '& fieldset': {
+                      borderColor: '#64b5f6'
+                    }
+                  } 
+                }}
                 sx={{ mb: 1 }}
               />
               <TextField
@@ -155,7 +172,14 @@ const Dashboard = () => {
                 value={sleepHours}
                 onChange={(e) => setSleepHours(e.target.value)}
                 InputLabelProps={{ sx: { color: '#90caf9' } }}
-                InputProps={{ sx: { color: '#fff' } }}
+                InputProps={{ 
+                  sx: { 
+                    color: '#fff',
+                    '& fieldset': {
+                      borderColor: '#64b5f6'
+                    }
+                  } 
+                }}
                 sx={{ mb: 1 }}
               />
               <Typography variant="caption" color="secondary">
@@ -164,55 +188,7 @@ const Dashboard = () => {
             </Box>
           </Grid>
 
-          {/* Center Column (Diet Plan + Notes) */}
-          <Grid item xs={12} sm={6} md={6}>
-            {/* Diet Plan */}
-            <Box
-              sx={{
-                bgcolor: '#3a3a3a',
-                borderRadius: 3,
-                p: 3,
-                color: '#fff',
-                border: '2px solid #64b5f6',
-                boxShadow: 4,
-                textAlign: 'center',
-                mb: 1,
-              }}
-            >
-              <FaApple size={60} color="#4caf50" style={{ marginBottom: 12 }} />
-              <Typography variant="h5" gutterBottom>🥗 Diet Plan</Typography>
-              <Typography variant="body1" gutterBottom><strong>Calories:</strong> 2500 kcal</Typography>
-              <Typography variant="body1" gutterBottom><strong>Protein:</strong> 150 g</Typography>
-              <Typography variant="body1"><strong>Foods:</strong> Rice, Chicken, Veggies, Fruit</Typography>
-            </Box>
-
-            {/* Today's Notes */}
-            <Box
-              sx={{
-                bgcolor: '#3a3a3a',
-                borderRadius: 3,
-                p: 3,
-                color: '#fff',
-                border: '2px solid #64b5f6',
-                boxShadow: 4,
-                textAlign: 'left',
-              }}
-            >
-              <Typography variant="h6" gutterBottom>📝 Today’s Notes</Typography>
-              <TextField
-                multiline
-                rows={4}
-                placeholder="Write your notes here..."
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-                fullWidth
-                InputProps={{ sx: { color: 'white' } }}
-                InputLabelProps={{ sx: { color: '#90caf9' } }}
-              />
-            </Box>
-          </Grid>
-
-          {/* Right Column (Exercise & Motivation) */}
+          {/* Right Column (Exercise) */}
           <Grid item xs={12} sm={6} md={3}>
             <Box
               sx={{
@@ -236,29 +212,19 @@ const Dashboard = () => {
                         checked={exerciseGoals[key]}
                         onChange={handleExerciseChange}
                         name={key}
-                        sx={{ color: '#64b5f6' }}
+                        sx={{ 
+                          color: '#64b5f6',
+                          '&.Mui-checked': {
+                            color: '#64b5f6'
+                          }
+                        }}
                       />
                     }
                     label={key.charAt(0).toUpperCase() + key.slice(1)}
+                    sx={{ color: 'white' }}
                   />
                 ))}
               </FormGroup>
-            </Box>
-            <Box
-              sx={{
-                bgcolor: '#3a3a3a',
-                borderRadius: 2,
-                p: 2,
-                color: '#fff',
-                border: '2px solid #64b5f6',
-                boxShadow: 3,
-                textAlign: 'center',
-              }}
-            >
-              <Typography variant="h6" gutterBottom>✨ Motivation</Typography>
-              <Typography variant="body2">
-                "The pain you feel today will be the strength you feel tomorrow."
-              </Typography>
             </Box>
           </Grid>
         </Grid>
