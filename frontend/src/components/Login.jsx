@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { auth, provider } from '../firebase.config.js'; // Adjust the path as necessary
 import { signInWithPopup } from "firebase/auth";
 

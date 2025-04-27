@@ -1,19 +1,11 @@
-import {
-  Box,
-  Button,
-  Container,
-  Typography,
-  TextField,
-  Grid,
-  MenuItem,
-} from "@mui/material";
+import { Box, Button, Container, Typography, TextField, Grid, MenuItem } from "@mui/material";
 import { useState } from "react";
 import { motion } from "framer-motion";
-
+import { useNavigate } from 'react-router-dom';
 
 const UserOnboarding = () => {
+  const navigate = useNavigate();
   const [step, setStep] = useState(1);
-
   const [formData, setFormData] = useState({
     age: '',
     gender: '',
@@ -43,8 +35,21 @@ const UserOnboarding = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    // Only submit the data when Step 4 is reached (final confirmation)
+    if (step === 4) {
+      console.log(formData);
 
+      // Show an alert for form submission
+      const isConfirmed = window.confirm("Are you sure you want to submit the form?");
+
+      if (isConfirmed) {
+        // Proceed to navigate if the user confirms
+        navigate('/dashboard');
+      } else {
+        // Optionally, you can handle the cancellation here
+        console.log("Submission canceled");
+      }
+    }
   };
 
   const genderOptions = ["Male", "Female", "Other"];
@@ -237,6 +242,15 @@ const UserOnboarding = () => {
             </TextField>
           </>
         );
+      case 4:
+        return (
+          <>
+            <Typography variant="h5" gutterBottom sx={{ color: 'white' }}>Confirm Submission</Typography>
+            <Typography sx={{ color: 'white' }}>
+              Are you ready to submit the information? Please review all the details carefully.
+            </Typography>
+          </>
+        );
       default:
         return <Typography sx={{ color: 'white' }}>Unknown Step</Typography>;
     }
@@ -276,7 +290,7 @@ const UserOnboarding = () => {
                   Back
                 </Button>
               )}
-              {step < 3 ? (
+              {step < 4 ? (
                 <Button variant="contained" color="primary" onClick={nextStep}>
                   Next
                 </Button>
