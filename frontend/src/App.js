@@ -7,6 +7,7 @@ import Sidebar from './components/Sidebar';
 import { Box } from '@mui/material';
 import DietPlan from './pages/DietPlan';
 
+
 function App() {
   return (
     <BrowserRouter>
