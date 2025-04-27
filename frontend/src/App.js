@@ -8,6 +8,7 @@ import { Box } from '@mui/material';
 import DietPlan from './pages/DietPlan';
 import { HealthDataProvider } from './context/HealthDataContext';
 
+
 function App() {
   return (
     <HealthDataProvider>
