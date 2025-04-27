@@ -1,21 +1,22 @@
-import React, { use } from 'react';
-import { Box, Typography, Button, Divider, Avatar, CircularProgress } from "@mui/material";
+import React from 'react';
+import { Box, Typography, Divider, Avatar, CircularProgress } from "@mui/material";
 import { useHealthData } from '../context/HealthDataContext';
 
 const Sidebar = () => {
   const user = JSON.parse(localStorage.getItem("user"));
+  const formData = useHealthData().formData;
+
   const calculateBMI = (weight, height) => {
     if (!weight || !height) return null;
     const heightInMeters = height / 100;
     return (weight / (heightInMeters * heightInMeters)).toFixed(1);
   };
-  const formData = useHealthData().formData
 
   const getBMIColor = (bmi) => {
     if (!bmi) return "#757575";
-    if (bmi < 25) return "#43a047";
-    if (bmi < 30) return "#fb8c00";
-    return "#e53935";
+    if (bmi < 25) return "#43a047";  // green
+    if (bmi < 30) return "#fb8c00";  // orange
+    return "#e53935";                // red
   };
 
   const bmi = formData ? calculateBMI(formData.weight, formData.height) : null;
@@ -36,7 +37,7 @@ const Sidebar = () => {
         flexDirection: "column",
         justifyContent: "space-between",
         zIndex: 1100,
-        overflowY:"hidden",
+        overflowY: "hidden",
         '@media (max-width: 600px)': {
           width: '100%',
           position: 'relative',
@@ -45,21 +46,21 @@ const Sidebar = () => {
       }}
     >
       <Box>
-        {/* User Profile Section */}
+        {/* User Profile */}
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", mb: 3 }}>
           <Avatar
-            src={user.picture || ""}
+            src={user?.picture || ""}
             alt={formData?.name || "User"}
             sx={{ width: 80, height: 80, mb: 1 }}
           />
           <Typography variant="h6" sx={{ fontWeight: 600, textAlign: "center" }}>
-            {user.name}
+            {user?.name || "User Name"}
           </Typography>
         </Box>
 
         <Divider sx={{ bgcolor: "grey.800", mb: 2 }} />
 
-        {/* User Data Section */}
+        {/* User Data */}
         {formData ? (
           <>
             <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", mb: 4 }}>
@@ -84,7 +85,7 @@ const Sidebar = () => {
                     flexDirection: 'column',
                   }}
                 >
-                  <Typography variant="h6" component="div" color="white">
+                  <Typography variant="h5" component="div" color="white">
                     BMI
                   </Typography>
                   <Typography variant="subtitle1" component="div" color="white">
@@ -94,38 +95,18 @@ const Sidebar = () => {
               </Box>
             </Box>
 
-            <Typography variant="body1" mb={1}>
-              <strong>Age:{formData.age}</strong>
-            </Typography>
-            <Typography variant="body1" mb={1}>
-              <strong>Height:{formData.height}cm</strong>
-            </Typography>
-            <Typography variant="body1" mb={1}>
-              <strong>Weight:{formData.weight}kg  </strong>
-            </Typography>
+            <Typography variant="body1" mb={1}><strong>Age: </strong>{formData.age}</Typography>
+            <Typography variant="body1" mb={1}><strong>Height: </strong>{formData.height} cm</Typography>
+            <Typography variant="body1" mb={1}><strong>Weight: </strong>{formData.weight} kg</Typography>
 
-            <Typography variant="h6" mb={1} mt={3}>
-              Health
-            </Typography>
-            <Typography variant="body2" mb={1}>
-              Conditions: {formData.healthConditions}
-            </Typography>
-            <Typography variant="body2" mb={3}>
-              Allergies: {formData.allergies}
-            </Typography>
+            <Typography variant="h6" mb={1} mt={3}><strong>Health</strong></Typography>
+            <Typography variant="body2" mb={1}><big>Conditions: </big>{formData.healthConditions}</Typography>
+            <Typography variant="body2" mb={3}><big>Allergies: </big>{formData.allergies}</Typography>
 
-            <Typography variant="h6" mb={1}>
-              Fitness & Diet
-            </Typography>
-            <Typography variant="body2" mb={1}>
-              Level: {formData.fitnessLevel}
-            </Typography>
-            <Typography variant="body2" mb={1}>
-              Goal: {formData.fitnessGoals}
-            </Typography>
-            <Typography variant="body2" mb={3}>
-              Diet: {formData.dietaryPreferences}
-            </Typography>
+            <Typography variant="h6" mb={1}><strong>Fitness & Diet</strong></Typography>
+            <Typography variant="body2" mb={1}><big>Level: </big>{formData.fitnessLevel}</Typography>
+            <Typography variant="body2" mb={1}><big>Goal: </big>{formData.fitnessGoals}</Typography>
+            <Typography variant="body2" mb={3}><big>Diet: </big>{formData.dietaryPreferences}</Typography>
           </>
         ) : (
           <Typography>No user data available.</Typography>
@@ -133,7 +114,20 @@ const Sidebar = () => {
       </Box>
 
       {/* Buttons at Bottom */}
-     
+      {/* <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+        <Button
+          variant="contained"
+          sx={{ bgcolor: "#2196f3", color: "white", fontWeight: 600, flex: 1, mr: 1 }}
+        >
+          SETTINGS
+        </Button>
+        <Button
+          variant="contained"
+          sx={{ bgcolor: "#4caf50", color: "white", fontWeight: 600, flex: 1 }}
+        >
+          PROFILE
+        </Button>
+      </Box> */}
     </Box>
   );
 };
