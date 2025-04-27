@@ -1,19 +1,20 @@
 import express from 'express';
-import { auth } from '../firebaseAdmin';
-import { setUser } from '../controllers/Login';
+import {auth} from '../firebaseAdmin.js';
+import { setUser } from '../controllers/Login.js';
 
 
 
-const router = express.Router();
+ const router = express.Router();
 
 // Register new user
 router.post('/login', async (req, res) => {
 
     const {idToken} = req.body;
+    console.log('ID Token:', idToken);
 
     try{
 
-        const decodedToken = await admin.auth().verifyIdToken(idToken);
+        const decodedToken = await auth.verifyIdToken(idToken);
         console.log('Decoded User:', decodedToken);
     
         const {uid, email, name, picture} = decodedToken;
@@ -58,3 +59,5 @@ router.post('/login', async (req, res) => {
 
 
 })
+
+export default router;

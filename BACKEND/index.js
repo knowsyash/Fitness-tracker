@@ -6,6 +6,7 @@ import connectDB from './database/connection.js';
 import userRoutes from './routes/userRoutes.js';
 import workoutRoutes from './routes/workoutRoutes.js';
 import nutritionRoutes from './routes/nutritionRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 
 // Load environment variables
 dotenv.config();
@@ -16,6 +17,10 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors(
+  {
+    origin: 'http://localhost:3000', 
+    credentials: true, 
+  }
     
 ));
 app.use(bodyParser.json());
@@ -30,6 +35,7 @@ connectDB()
     });
 
     // Routes
+    app.use('/api/auth',authRoutes)
     app.use('/api/users', userRoutes);
     app.use('/api/workouts', workoutRoutes);
     app.use('/api/nutrition', nutritionRoutes);

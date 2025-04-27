@@ -15,23 +15,23 @@ const UserSchema = new Schema({
     unique: true,
     trim: true
   },
-  password: {
+ 
+  // profile: {
+  //   name: String,
+  //   gender: String,
+  //   dateOfBirth: Date,
+  //   weight: Number,
+  //   height: Number,
+  //   fitnessGoal: String
+  // },
+  picture:{
     type: String,
-    required: true,
-    minlength: 6
-  },
-  profile: {
-    name: String,
-    gender: String,
-    dateOfBirth: Date,
-    weight: Number,
-    height: Number,
-    fitnessGoal: String
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
+   
+    default: 'https://example.com/default-profile-pic.jpg' // Default profile picture URL
   }
-});
+
+  
+
+},{timestamps: true});
 
 export default mongoose.model('User', UserSchema);
