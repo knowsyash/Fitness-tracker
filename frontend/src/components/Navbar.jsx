@@ -63,8 +63,8 @@ function Navbar(props) {
         component="nav"
         position="fixed"
         sx={{
-          bgcolor: 'rgba(255, 255, 255, 0.1)',
-          backdropFilter: 'blur(10px)',
+          bgcolor: 'rgba(0, 0, 0, 0.9)',
+          // backdropFilter: 'blur(10px)',
           boxShadow: 'none',
         }}
       >
@@ -129,9 +129,9 @@ function Navbar(props) {
             '& .MuiDrawer-paper': {
               boxSizing: 'border-box',
               width: drawerWidth,
-              bgcolor: 'rgba(255, 255, 255, 0.1)',
-              backdropFilter: 'blur(10px)',
-              borderRight: '1px solid rgba(255,255,255,0.3)',
+              bgcolor: 'rgba(0, 0, 0, 0.1)',
+              // backdropFilter: 'blur(10px)',
+              borderRight: '1px solid rgba(0, 0, 0, 0.3)',
             },
           }}
         >

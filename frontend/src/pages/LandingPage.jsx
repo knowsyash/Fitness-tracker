@@ -12,7 +12,7 @@ function LandingPage() {
   return (
     <>
       <SpaceBackground /> {/* Add space background here */}
-      <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative', zIndex: 1 }}>
+      <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative', zIndex: 1, alignItems: 'center', justifyContent: 'center' }}>
         {/* Hero Section */}
         <Box
           sx={{
