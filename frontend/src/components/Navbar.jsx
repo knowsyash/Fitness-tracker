@@ -15,6 +15,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useNavigate, useLocation } from 'react-router-dom';
+import handleGoogleLogin from './Login';
 
 const drawerWidth = 240;
 const navItems = ['Start', 'About', 'Contact'];
@@ -107,7 +108,7 @@ function Navbar(props) {
                 variant="contained"
                 color="primary"
                 sx={{ ml: 2, fontWeight: 'bold', textTransform: 'none' }}
-                onClick={() => navigate('/login')}
+                onClick={handleGoogleLogin}
               >
                 Login
               </Button>
