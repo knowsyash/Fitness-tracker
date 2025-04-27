@@ -1,0 +1,68 @@
+[
+    {
+      "user": "60c72b2f9f1b2c001c8a5f74",
+      "age": 25,
+      "height": 175,
+      "weight": 70,
+      "healthConditions": ["Diabetes"],
+      "allergies": ["Peanuts"],
+      "fitnessLevel": "Intermediate",
+      "fitnessGoals": ["Lose Weight", "Improve Endurance"],
+      "dietaryPreference": "Vegetarian",
+      "createdAt": "2025-04-27T08:30:00.000Z",
+      "updatedAt": "2025-04-27T08:30:00.000Z"
+    },
+    {
+      "user": "60c72b2f9f1b2c001c8a5f75",
+      "age": 30,
+      "height": 160,
+      "weight": 60,
+      "healthConditions": ["Heart Disease"],
+      "allergies": ["Dairy"],
+      "fitnessLevel": "Advanced",
+      "fitnessGoals": ["Gain Muscle", "Stay Healthy"],
+      "dietaryPreference": "Non-Vegetarian",
+      "createdAt": "2025-04-27T09:00:00.000Z",
+      "updatedAt": "2025-04-27T09:00:00.000Z"
+    },
+    {
+      "user": "60c72b2f9f1b2c001c8a5f76",
+      "age": 40,
+      "height": 180,
+      "weight": 85,
+      "healthConditions": ["Asthma", "Diabetes"],
+      "allergies": ["Gluten"],
+      "fitnessLevel": "Beginner",
+      "fitnessGoals": ["Lose Weight"],
+      "dietaryPreference": "Vegan",
+      "createdAt": "2025-04-27T09:30:00.000Z",
+      "updatedAt": "2025-04-27T09:30:00.000Z"
+    },
+    {
+      "user": "60c72b2f9f1b2c001c8a5f77",
+      "age": 22,
+      "height": 165,
+      "weight": 58,
+      "healthConditions": [],
+      "allergies": [],
+      "fitnessLevel": "Intermediate",
+      "fitnessGoals": ["Improve Endurance", "Stay Healthy"],
+      "dietaryPreference": "Non-Vegetarian",
+      "createdAt": "2025-04-27T10:00:00.000Z",
+      "updatedAt": "2025-04-27T10:00:00.000Z"
+    },
+    {
+      "user": "60c72b2f9f1b2c001c8a5f78",
+      "age": 35,
+      "height": 172,
+      "weight": 78,
+      "healthConditions": ["Heart Disease"],
+      "allergies": ["Peanuts"],
+      "fitnessLevel": "Advanced",
+      "fitnessGoals": ["Gain Muscle", "Stay Healthy"],
+      "dietaryPreference": "Vegetarian",
+      "createdAt": "2025-04-27T10:30:00.000Z",
+      "updatedAt": "2025-04-27T10:30:00.000Z"
+    }
+  ]
+  

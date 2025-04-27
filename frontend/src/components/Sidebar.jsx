@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Box, Typography, Button, Divider, Avatar, CircularProgress } from "@mui/material";
 
@@ -10,10 +9,10 @@ const Sidebar = ({ formData }) => {
   };
 
   const getBMIColor = (bmi) => {
-    if (!bmi) return "#757575"; // grey for no data
-    if (bmi < 25) return "#43a047"; // green
-    if (bmi < 30) return "#fb8c00"; // orange
-    return "#e53935"; // red
+    if (!bmi) return "#757575";
+    if (bmi < 25) return "#43a047";
+    if (bmi < 30) return "#fb8c00";
+    return "#e53935";
   };
 
   const bmi = formData ? calculateBMI(formData.weight, formData.height) : null;
@@ -35,18 +34,16 @@ const Sidebar = ({ formData }) => {
         justifyContent: "space-between",
         zIndex: 1100,
         overflowY: "auto",
+        '@media (max-width: 600px)': {
+          width: '100%',
+          position: 'relative',
+          top: 0
+        }
       }}
     >
       <Box>
         {/* User Profile Section */}
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            mb: 3,
-          }}
-        >
+        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", mb: 3 }}>
           <Avatar
             src={formData?.profilePictureUrl || ""}
             alt={formData?.name || "User"}
@@ -62,18 +59,14 @@ const Sidebar = ({ formData }) => {
         {/* User Data Section */}
         {formData ? (
           <>
-            {/* BMI Progress Ring */}
             <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", mb: 4 }}>
               <Box sx={{ position: "relative", display: "inline-flex" }}>
                 <CircularProgress
                   variant="determinate"
-                  value={bmi ? Math.min(bmi, 40) * 2.5 : 0} // scaled fill
+                  value={bmi ? Math.min(bmi, 40) * 2.5 : 0}
                   size={120}
                   thickness={5}
-                  sx={{
-                    color: bmiColor,
-                    animationDuration: '1.5s',
-                  }}
+                  sx={{ color: bmiColor }}
                 />
                 <Box
                   sx={{
@@ -98,7 +91,6 @@ const Sidebar = ({ formData }) => {
               </Box>
             </Box>
 
-            {/* User Info */}
             <Typography variant="body1" mb={1}>
               <strong>Age:</strong> {formData.age}
             </Typography>
@@ -151,7 +143,7 @@ const Sidebar = ({ formData }) => {
             fontWeight: "bold",
           }}
         >
-          BUTTON 1
+          Settings
         </Button>
         <Button
           variant="contained"
@@ -165,7 +157,7 @@ const Sidebar = ({ formData }) => {
             fontWeight: "bold",
           }}
         >
-          BUTTON 2
+          Profile
         </Button>
       </Box>
     </Box>
@@ -173,4 +165,3 @@ const Sidebar = ({ formData }) => {
 };
 
 export default Sidebar;
-
