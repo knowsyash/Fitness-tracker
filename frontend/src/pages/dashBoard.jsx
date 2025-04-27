@@ -75,8 +75,16 @@ const Dashboard = () => {
   const isTargetReached = waterProgress >= parseInt(waterTarget);
 
   return (
-    <Box sx={{ width: '100%', backgroundColor: '#0f172a', minHeight: '100vh', pb: 6, pt: 3 }}>
-      
+    <Box
+      sx={{
+        width: '100%',
+        height: '88vh',
+        backgroundColor: '#f172a',
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'hidden',
+      }}
+    >
       {/* Dashboard Header */}
       <Box
         sx={{
@@ -84,7 +92,7 @@ const Dashboard = () => {
           maxWidth: 1000,
           mx: 'auto',
           textAlign: 'center',
-          mb: 5,
+          mb: 3,
           borderBottom: '2px solid #4ade80',
           pb: 2,
         }}
@@ -97,52 +105,50 @@ const Dashboard = () => {
         </Typography>
       </Box>
 
-      <Container maxWidth="lg">
-        <Grid container spacing={4} justifyContent="center">
-          
-          {/* Water Tracker */}
-          <Grid item xs={12} sm={6} md={4}>
-            <Box
-              sx={{
-                bgcolor: '#1e293b',
-                borderRadius: 4,
-                p: 4,
-                color: '#f1f5f9',
-                border: '2px solid #4ade80',
-                boxShadow: 6,
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-              }}
-            >
-              <Typography variant="h5" fontWeight="bold" color="#4ade80" gutterBottom>
-                💧 Water Intake
-              </Typography>
-
-              <TextField
-                fullWidth
-                variant="outlined"
-                label="Target (Glasses)"
-                value={waterTarget}
-                onChange={(e) => {
-                  setWaterTarget(e.target.value);
-                  setTaskCompleted(false);
-                  setWaterProgress(0);
+      {/* Main Content */}
+      <Container maxWidth="lg" sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container spacing={4} justifyContent="center">
+            {/* Water Tracker */}
+            <Grid item xs={12} sm={6} md={4}>
+              <Box
+                sx={{
+                  bgcolor: '#1e293f',
+                  borderRadius: 6,
+                  p: 4,
+                  color: '#f1f5f9',
+                  border: '2px solid #22c55e',
+                  boxShadow: 4,
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
                 }}
-                InputLabelProps={{ sx: { color: '#4ade80' } }}
-                InputProps={{
-                  sx: {
-                    color: '#f1f5f9',
-                    '& fieldset': {
-                      borderColor: '#4ade80',
+              >
+                <Typography variant="h5" fontWeight="bold" color="#4ade80" gutterBottom>
+                  💧 Water Intake
+                </Typography>
+
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  label="Target (Glasses)"
+                  value={waterTarget}
+                  onChange={(e) => {
+                    setWaterTarget(e.target.value);
+                    setTaskCompleted(false);
+                    setWaterProgress(0);
+                  }}
+                  InputLabelProps={{ sx: { color: '#4ade80' } }}
+                  InputProps={{
+                    sx: {
+                      color: '#f1f5f9',
+                      '& fieldset': { borderColor: '#4ade80' },
                     },
-                  },
-                }}
-                sx={{ mb: 3 }}
-              />
+                  }}
+                  sx={{ mb: 3 }}
+                />
 
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                 <Badge badgeContent={waterProgress} color="success">
                   <Button
                     variant="contained"
@@ -151,9 +157,7 @@ const Dashboard = () => {
                     disabled={isTargetReached}
                     sx={{
                       backgroundColor: isTargetReached ? '#64748b' : '#4ade80',
-                      '&:hover': {
-                        backgroundColor: isTargetReached ? '#64748b' : '#22c55e',
-                      },
+                      '&:hover': { backgroundColor: isTargetReached ? '#64748b' : '#22c55e' },
                       px: 4,
                       py: 1,
                       fontWeight: 'bold',
@@ -162,145 +166,138 @@ const Dashboard = () => {
                     {isTargetReached ? 'Completed' : 'Add Water'}
                   </Button>
                 </Badge>
-              </Box>
 
-              <Box sx={{ mt: 3, width: '100%' }}>
-                <Typography variant="body2" sx={{ color: '#f1f5f9', mb: 1, textAlign: 'center' }}>
-                  {Math.min(waterProgress, waterTarget)} / {waterTarget} Glasses
+                <Box sx={{ mt: 3, width: '100%' }}>
+                  <Typography variant="body2" sx={{ color: '#f1f5f9', mb: 1, textAlign: 'center' }}>
+                    {Math.min(waterProgress, waterTarget)} / {waterTarget} Glasses
+                  </Typography>
+                  <LinearProgress
+                    variant="determinate"
+                    value={calculateProgress()}
+                    sx={{
+                      height: 10,
+                      borderRadius: 5,
+                      backgroundColor: '#334155',
+                      '& .MuiLinearProgress-bar': { backgroundColor: '#4ade80' },
+                    }}
+                  />
+                </Box>
+
+                {taskCompleted && (
+                  <Grow in={taskCompleted}>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        mt: 3,
+                        color: '#22c55e',
+                        fontWeight: 'bold',
+                        animation: 'pulse 1.5s infinite alternate',
+                      }}
+                    >
+                      🎉 Task Completed!
+                    </Typography>
+                  </Grow>
+                )}
+              </Box>
+            </Grid>
+
+            {/* Sleep Tracker */}
+            <Grid item xs={12} sm={6} md={4}>
+              <Box
+                sx={{
+                  bgcolor: '#1e293b',
+                  borderRadius: 6,
+                  p: 4,
+                  color: '#f1f5f9',
+                  border: '2px solid #22c55e',
+                  boxShadow: 4,
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
+                <Typography variant="h5" fontWeight="bold" color="#4ade80" gutterBottom>
+                  💤 Sleep Tracker
                 </Typography>
-                <LinearProgress
-                  variant="determinate"
-                  value={calculateProgress()}
-                  sx={{
-                    height: 12,
-                    borderRadius: 6,
-                    backgroundColor: '#334155',
-                    '& .MuiLinearProgress-bar': { backgroundColor: '#4ade80' },
+
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  label="Target (Hours)"
+                  value={sleepTarget}
+                  onChange={(e) => setSleepTarget(e.target.value)}
+                  InputLabelProps={{ sx: { color: '#4ade80' } }}
+                  InputProps={{
+                    sx: {
+                      color: '#f1f5f9',
+                      '& fieldset': { borderColor: '#4ade80' },
+                    },
+                  }}
+                  sx={{ mb: 3 }}
+                />
+
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  label="Hours Slept"
+                  value={sleepHours}
+                  onChange={(e) => setSleepHours(e.target.value)}
+                  InputLabelProps={{ sx: { color: '#4ade80' } }}
+                  InputProps={{
+                    sx: {
+                      color: '#f1f5f9',
+                      '& fieldset': { borderColor: '#4ade80' },
+                    },
                   }}
                 />
               </Box>
+            </Grid>
 
-              {taskCompleted && (
-                <Grow in={taskCompleted}>
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      mt: 3,
-                      color: '#22c55e',
-                      fontWeight: 'bold',
-                      animation: 'pulse 1.5s infinite alternate',
-                    }}
-                  >
-                    🎉 Task Completed!
-                  </Typography>
-                </Grow>
-              )}
-            </Box>
-          </Grid>
-
-          {/* Sleep Tracker */}
-          <Grid item xs={12} sm={6} md={4}>
-            <Box
-              sx={{
-                bgcolor: '#1e293b',
-                borderRadius: 4,
-                p: 4,
-                color: '#f1f5f9',
-                border: '2px solid #4ade80',
-                boxShadow: 6,
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-              }}
-            >
-              <Typography variant="h5" fontWeight="bold" color="#4ade80" gutterBottom>
-                😴 Sleep Tracker
-              </Typography>
-
-              <TextField
-                fullWidth
-                variant="outlined"
-                label="Target (Hours)"
-                value={sleepTarget}
-                onChange={(e) => setSleepTarget(e.target.value)}
-                InputLabelProps={{ sx: { color: '#4ade80' } }}
-                InputProps={{
-                  sx: {
-                    color: '#f1f5f9',
-                    '& fieldset': {
-                      borderColor: '#4ade80',
-                    },
-                  },
+            {/* Exercise Goals */}
+            <Grid item xs={12} sm={6} md={4}>
+              <Box
+                sx={{
+                  bgcolor: '#1e293b',
+                  borderRadius: 6,
+                  p: 4,
+                  color: '#f1f5f9',
+                  border: '2px solid #22c55e',
+                  boxShadow: 4,
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
                 }}
-                sx={{ mb: 3 }}
-              />
+              >
+                <Typography variant="h5" fontWeight="bold" color="#4ade80" gutterBottom>
+                  🏋️ Exercise Goals
+                </Typography>
 
-              <TextField
-                fullWidth
-                variant="outlined"
-                label="Hours Slept"
-                value={sleepHours}
-                onChange={(e) => setSleepHours(e.target.value)}
-                InputLabelProps={{ sx: { color: '#4ade80' } }}
-                InputProps={{
-                  sx: {
-                    color: '#f1f5f9',
-                    '& fieldset': {
-                      borderColor: '#4ade80',
-                    },
-                  },
-                }}
-              />
-            </Box>
-          </Grid>
-
-          {/* Exercise Goals */}
-          <Grid item xs={12} sm={6} md={4}>
-            <Box
-              sx={{
-                bgcolor: '#1e293b',
-                borderRadius: 4,
-                p: 4,
-                color: '#f1f5f9',
-                border: '2px solid #4ade80',
-                boxShadow: 6,
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-              }}
-            >
-              <Typography variant="h5" fontWeight="bold" color="#4ade80" gutterBottom>
-                🏋️ Exercise Goals
-              </Typography>
-
-              <FormGroup sx={{ alignItems: 'flex-start', mt: 2 }}>
-                {['pushups', 'running', 'squats', 'jumpRope'].map((key) => (
-                  <FormControlLabel
-                    key={key}
-                    control={
-                      <Checkbox
-                        checked={exerciseGoals[key]}
-                        onChange={handleExerciseChange}
-                        name={key}
-                        sx={{
-                          color: '#4ade80',
-                          '&.Mui-checked': {
+                <FormGroup sx={{ alignItems: 'flex-start', mt: 2 }}>
+                  {['pushups', 'running', 'squats', 'jumpRope'].map((key) => (
+                    <FormControlLabel
+                      key={key}
+                      control={
+                        <Checkbox
+                          checked={exerciseGoals[key]}
+                          onChange={handleExerciseChange}
+                          name={key}
+                          sx={{
                             color: '#4ade80',
-                          },
-                        }}
-                      />
-                    }
-                    label={key.charAt(0).toUpperCase() + key.slice(1)}
-                    sx={{ color: '#f1f5f9' }}
-                  />
-                ))}
-              </FormGroup>
-            </Box>
+                            '&.Mui-checked': { color: '#4ade80' },
+                          }}
+                        />
+                      }
+                      label={key.charAt(0).toUpperCase() + key.slice(1)}
+                      sx={{ color: '#f1f5f9' }}
+                    />
+                  ))}
+                </FormGroup>
+              </Box>
+            </Grid>
           </Grid>
-
-        </Grid>
+        </Box>
       </Container>
     </Box>
   );
