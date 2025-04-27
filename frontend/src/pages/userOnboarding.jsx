@@ -2,21 +2,12 @@ import { Box, Button, Container, Typography, TextField, Grid, MenuItem } from "@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
+import { useHealthData } from "../context/HealthDataContext";
 
 const UserOnboarding = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    age: '',
-    gender: '',
-    height: '',
-    weight: '',
-    healthConditions: '',
-    allergies: '',
-    fitnessLevel: '',
-    fitnessGoals: '',
-    dietaryPreferences: '',
-  });
+  const { formData, setFormData } = useHealthData();
 
   const handleChange = (e) => {
     setFormData(prev => ({

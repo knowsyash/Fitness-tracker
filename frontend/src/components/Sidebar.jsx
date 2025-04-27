@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { use } from 'react';
 import { Box, Typography, Button, Divider, Avatar, CircularProgress } from "@mui/material";
+import { useHealthData } from '../context/HealthDataContext';
 
-const Sidebar = ({ formData }) => {
+const Sidebar = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
   const calculateBMI = (weight, height) => {
     if (!weight || !height) return null;
     const heightInMeters = height / 100;
     return (weight / (heightInMeters * heightInMeters)).toFixed(1);
   };
+  const formData = useHealthData().formData
 
   const getBMIColor = (bmi) => {
     if (!bmi) return "#757575";
@@ -33,7 +36,7 @@ const Sidebar = ({ formData }) => {
         flexDirection: "column",
         justifyContent: "space-between",
         zIndex: 1100,
-        overflowY: "auto",
+        overflowY:"hidden",
         '@media (max-width: 600px)': {
           width: '100%',
           position: 'relative',
@@ -45,12 +48,12 @@ const Sidebar = ({ formData }) => {
         {/* User Profile Section */}
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", mb: 3 }}>
           <Avatar
-            src={formData?.profilePictureUrl || ""}
+            src={user.picture || ""}
             alt={formData?.name || "User"}
             sx={{ width: 80, height: 80, mb: 1 }}
           />
           <Typography variant="h6" sx={{ fontWeight: 600, textAlign: "center" }}>
-            {formData?.name || "User Name"}
+            {user.name}
           </Typography>
         </Box>
 
@@ -92,13 +95,13 @@ const Sidebar = ({ formData }) => {
             </Box>
 
             <Typography variant="body1" mb={1}>
-              <strong>Age:</strong> {formData.age}
+              <strong>Age:{formData.age}</strong>
             </Typography>
             <Typography variant="body1" mb={1}>
-              <strong>Height:</strong> {formData.height} cm
+              <strong>Height:{formData.height}cm</strong>
             </Typography>
             <Typography variant="body1" mb={1}>
-              <strong>Weight:</strong> {formData.weight} kg
+              <strong>Weight:{formData.weight}kg  </strong>
             </Typography>
 
             <Typography variant="h6" mb={1} mt={3}>
@@ -130,36 +133,7 @@ const Sidebar = ({ formData }) => {
       </Box>
 
       {/* Buttons at Bottom */}
-      <Box sx={{ display: "flex", gap: 2 }}>
-        <Button
-          variant="contained"
-          color="primary"
-          fullWidth
-          sx={{
-            bgcolor: "#1e88e5",
-            "&:hover": { bgcolor: "#1565c0" },
-            borderRadius: 2,
-            py: 1.5,
-            fontWeight: "bold",
-          }}
-        >
-          Settings
-        </Button>
-        <Button
-          variant="contained"
-          color="secondary"
-          fullWidth
-          sx={{
-            bgcolor: "#43a047",
-            "&:hover": { bgcolor: "#2e7d32" },
-            borderRadius: 2,
-            py: 1.5,
-            fontWeight: "bold",
-          }}
-        >
-          Profile
-        </Button>
-      </Box>
+     
     </Box>
   );
 };
